@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件处理</title>
+
+</head>
+<body>
+<div id="test"></div>
+<!-- 引入react核心库 -->
+<script
+        src="https://unpkg.com/react@16/umd/react.development.js"
+        crossorigin></script>
+<!-- 引入react-dom 用于支撑react操作dom -->
+<script
+        src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+        crossorigin></script>
+<!-- 引入babel,用于将jsx转为js -->
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+<script type="text/babel">
+
+    class DemoCom extends React.Component {
+
+        /*
+        *
+        * 1.  通过onXXX属性指定事件处理函数（注意大小写）  —————————————————— 注意大小  onClick
+            1.  React使用的是自定义（合成）事件，而不是使用的原生DOM事件   ——————————————————  为了更好的兼容
+            2.  React中的事件是通过事件委托方式处理的（委托给组件最外层的远程）  ——————————————————  为了的高效
+          2.  通过Event.target得到发生事件的DOM元素对象   ——————————————————  不要过度使用ref
+        * */
+
+
+        // 创建ref容器
+        MyRef = React.createRef()
+
+
+        // 接收到的是event.target
+        hid = (e) => {
+            alert(e.target.value)
+        }
+
+
+        render() {
+            return (
+                <div>
+                    <input onBlur={this.hid} id="input" type="text" placeholder="点击按钮提示数据"/>
+                </div>
+            )
+        }
+    }
+
+    ReactDOM.render(<DemoCom/>, document.querySelector('#test'))
+</script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"/>
+    <title>Document</title>
+</head>
+<body>
+<div id="test"></div>
+<!-- 引入react核心库 -->
+<script
+        src="https://unpkg.com/react@16/umd/react.development.js"
+        crossorigin></script>
+<!-- 引入react-dom 用于支撑react操作dom -->
+<script
+        src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+        crossorigin></script>
+<!-- 引入babel,用于将jsx转为js -->
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+<script type="text/babel">
+    // 1.创建组件
+    class MyComponent extends React.Component {
+        // 显示左侧input
+        // 创建方法
+        showDate = (e) => {
+            // react 写法1
+            // 判断有没有值 有执行
+            const {input} = this
+            // 原生写法 写法2
+            // const input = document.querySelector('#input')
+            alert(input.value)
+        }
+
+        // 右侧 失去焦点
+        Blur = () => {
+            // 原生写法 1
+            // const inputDom = document.querySelector("#inputDom")
+            // React 写法 2
+            const {inputDom} = this
+
+            alert(inputDom.value)
+        }
+
+
+        render() {
+            return (
+                <div>
+                    <input id="input" type="text" placeholder="点击按钮提示数据" ref={(e)=>{this.input = e}}/>
+                    <button onClick={this.showDate}>点击获取第一个输入框的文字并提示</button>
+                    <input onBlur={this.Blur} id="inputDom" ref={e=>this.inputDom = e} type="text" placeholder="失去焦点提示数据"/>
+                </div>
+            )
+        }
+
+
+    }
+
+
+    // 渲染dom
+    ReactDOM.render(<MyComponent/>, document.querySelector('#test'))
+
+
+</script>
+</body>
+</html>

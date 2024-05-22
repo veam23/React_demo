@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>react生命周期(新)-getDerivedStateFromProps</title>
+</head>
+<body>
+<div id="test"></div>
+<script src="../React18/react.development.js"></script>
+<script src="../React18/react-dom.development.js"></script>
+<!-- 生产环境中不建议使用 -->
+<script src="../React18/babel.min.js"></script>
+
+<script type="text/babel">
+	class Time extends React.Component {
+		state = {date: new Date()};
+		
+		componentDidMount() {
+			setInterval(() => {
+				this.setState({
+					data: new Date()
+				});
+			}, 1000);
+		}
+		
+		render() {
+			return (
+					<div>
+						<h1>hello</h1>
+						<input type="text" />
+						<span>现在是：{this.state.date.toTimeString()}</span>
+					</div>
+			);
+		}
+	}
+	
+	
+	const counter = document.querySelector("#test")
+	const root = ReactDOM.createRoot(counter)
+	
+	root.render(<Text />);
+
+</script>
+
+</body>
+</html>

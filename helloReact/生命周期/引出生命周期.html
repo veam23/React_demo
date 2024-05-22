@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<body>
+<div id="test"></div>
+<script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+<script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+<!-- 生产环境中不建议使用 -->
+<script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+
+<script type="text/babel">
+	// 创建ReactDom
+
+	// 生命周期回调函数 <=> 生命周期钩子函数 <=> 生命周期函数 <=> 生命周期钩子
+	class MyComponent extends React.Component {
+
+		state = {
+			opacity: 1,
+		}
+
+		RenderDom = () => {
+
+			// 卸载组件 unmountComponentAtNode
+			ReactDOM.unmountComponentAtNode(document.querySelector('#test'))
+		}
+
+		// 组件挂在完毕 只会触发一次
+		componentDidMount() {
+			// 定时器
+			this.outSetInter = setInterval(() => {
+				console.log('1111')
+				// 获取state中的opacity
+				let {opacity} = this.state
+				// 每次减去0.0
+				opacity -= 0.1
+				// 判断如果为0了重新赋值为1
+				if (opacity <= 0) opacity = 1
+				// 修改对应的状态
+				this.setState({opacity})
+			}, 200)
+		}
+
+		// 组件将要卸载
+		componentWillUnmount() {
+			// 卸载定时器
+			clearInterval(this.outSetInter)
+		}
+
+		// 初始化渲染，状态更新之后
+		render() {
+			return (
+					<div>
+						<h2 style={{opacity: this.state.opacity}}>React真好玩</h2>
+						<button onClick={this.RenderDom}>不活了</button>
+					</div>
+			)
+		}
+
+	}
+
+
+	// 注入到Dom中 渲染
+	ReactDOM.render(<MyComponent/>, document.querySelector('#test'))
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,23 @@
+.TodoFooter{
+    height: 40px;
+    line-height: 40px;
+    padding-left: 6px;
+    margin-top: 5px;
+}
+.TodoFooter label{
+    display: inline-block;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.TodoFooter label input {
+    position: relative;
+    top: -1px;
+    vert-align: middle;
+    margin-right: 5px;
+}
+
+.TodoFooter button{
+    float: right;
+    margin-top: 5px;
+}

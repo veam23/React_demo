@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>react生命周期(新)-getSnapshotBeforeUpdate</title>
+</head>
+<body>
+<div id="test"></div>
+<script src="../React18/react.development.js"></script>
+<script src="../React18/react-dom.development.js"></script>
+<!-- 生产环境中不建议使用 -->
+<script src="../React18/babel.min.js"></script>
+
+<script type="text/babel">
+	// 创建ReactDom
+	// 生命周期回调函数 <=> 生命周期钩子函数 <=> 生命周期函数 <=> 生命周期钩子
+	class StartCounter extends React.Component {
+		// 构造器
+		constructor(props) {
+			console.log('StartCounter-constructor')
+			super(props)
+			this.state = {count: 0}
+		}
+
+		// static 静态方法
+		/**
+		 * @author Veam23
+		 * @date 2023/12/23 23:18:23
+		 * @Description:
+		 * props：组件即将用来渲染的下一个 props。
+		 * state：组件即将渲染的下一个 state。
+		 * // 需要返回两种参数 state.object  / null 否则是 undefined
+		 * 使用场景: 若state的值在任何时候都取决于props,那么可以使用
+		 */
+		static getDerivedStateFromProps(props, state) {
+			// 具体看控制台打印
+			console.log(props, state, 'getDerivedStateFromProps')
+			return null
+		}
+
+		// 渲染
+		render() {
+			console.log('render')
+			return (
+					<div>
+						<h1>测试：{this.state.count}</h1>
+						<button onClick={this.add}>点击+1</button>
+					</div>
+			)
+		}
+
+		/**
+		 * @author Veam23
+		 * @date 2023/12/23 23:35:01
+		 * @Description:
+		 *  必须要返回一个 snapshot的值 / null 否则为 undefined 你返回的值将作为第三个参数传递给 componentDidUpdate。
+		 *  参数：
+		 *  prevProps：prevProps：更新之前的 Props。prevProps 将会与 this.props 进行比较来确定发生了什么改变。
+		 *  prevState：更新之前的 State。prevState 将会与 this.state 进行比较来确定发生了什么改变。
+		 *
+		 */
+		// 在更新之前获取快照
+		getSnapshotBeforeUpdate(prevProps, prevState) {
+			console.log(prevProps, prevState, 'getSnapshotBeforeUpdate')
+			// 可以传递任何常见的js类型
+			return 111
+		}
+
+		// 组件更新完毕的钩子
+		componentDidUpdate(a, b, snapshot) {
+			//第三个参数是  接收到了 getSnapshotBeforeUpdate 返回的值
+			console.log('StartCounter-componentDidMount', a, b, snapshot)
+		}
+
+		// 加1
+		add = () => {
+			let {count} = this.state
+			count += 1
+			this.setState({count})
+
+
+		}
+	}
+
+	// 注入到Dom中 渲染 18 写法
+	const counter = document.querySelector('#test')
+	const root = ReactDOM.createRoot(counter)
+	// 传递参数
+	root.render(<StartCounter count={100}/>)
+</script>
+
+
+</body>
+</html>

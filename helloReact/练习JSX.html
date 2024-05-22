@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+   
+  <body>
+    <div id="test"></div>
+     <!-- 引入react核心库 -->
+    <script
+      src="https://unpkg.com/react@16/umd/react.development.js"
+      crossorigin></script>
+    <!-- 引入react-dom 用于支撑react操作dom -->
+    <script
+      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+      crossorigin></script>
+    <!-- 引入babel,用于将jsx转为js -->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  </head>
+
+    <script type="text/babel">
+      const arr = [
+        {
+          "Name":'Angular',
+          "id":0
+        },
+        {
+          "Name":'React',
+          "id":1
+        },
+        {
+          "Name":'Vue',
+          "id":2
+        }
+      ]
+
+      const arrIndex =  eval(arr)
+
+      const TDom = (
+        <div>
+          <h1>前端js框架列表</h1>
+          <ul>{eval(arr).map(item=>{return <li key={item.id}>{item.Name}</li>})}</ul>
+        </div>
+        )
+      ReactDOM.render(TDom,document.querySelector('#test'))
+    </script>
+  </body>
+</html>

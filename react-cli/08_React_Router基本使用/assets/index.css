@@ -1,0 +1,37 @@
+#root {
+    position: relative;
+}
+
+.Main {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.MainTitle {
+
+}
+
+.MainContent {
+    display: grid;
+    /*  声明列的宽度  */
+    grid-template-columns: 200px 1fr;
+    /* 列隔开的距离*/
+    grid-gap: 30px;
+}
+
+.NavigationWidth {
+    display: grid;
+    grid-template-rows: repeat(2, 50px);
+}
+
+.NavigationWidth .btn {
+    width: 100%;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.ContentWidth {
+
+}

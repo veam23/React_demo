@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"/>
+    <title>Document</title>
+</head>
+<body>
+<div id="test"></div>
+<div id="test2"></div>
+<div id="test3"></div>
+
+<!-- 引入react核心库 -->
+<script
+        src="https://unpkg.com/react@16/umd/react.development.js"
+        crossorigin></script>
+<!-- 引入react-dom 用于支撑react操作dom -->
+<script
+        src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+        crossorigin></script>
+<!-- 引入babel,用于将jsx转为js -->
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+<!-- 引入PropTypes -->
+<script src="https://unpkg.com/prop-types@15.6/prop-types.min.js"></script>
+<script type="text/babel">
+    // 接收参数
+    function Person(props) {
+        console.log(props)
+        const {name, age, sex} = props
+        return (
+            <div>
+                <h2>我是函数定义的组件</h2>
+                <ul>
+                    <li>{name}</li>
+                    <li>{age}</li>
+                    <li>{sex}</li>
+                </ul>
+            </div>
+        )
+    }
+
+    // 对props进行限制
+    Person.propTypes = {
+        // 限制name为字符串   //isRequired必传
+        name: PropTypes.string.isRequired,
+    }
+    // 指定默认值
+    Person.defaultProps = {
+        name: '胡汉三',
+        sex: '不男不女',
+    }
+
+    const p = {age: 123}
+    // 传递参数
+    ReactDOM.render(<Person {...p} />, document.querySelector('#test3'))
+</script>
+</body>
+</html>
